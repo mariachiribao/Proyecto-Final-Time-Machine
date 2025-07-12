@@ -1,0 +1,1029 @@
+/* ================= RESET & VARIABLES ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Colores y gradientes */
+  --backgroundBody: antiquewhite;
+  --backgroundFooter: linear-gradient(-285deg, rgba(64,9,115,1) 30%, rgba(35,35,204,1) 54%, rgb(252,253,253) 95%);
+  --colorText: rgba(35,35,204,1);
+  --colorPrimary: #5468ff;
+  --colorPrimaryDark: #3c4fe0;
+}
+
+/* ================= ESTILOS GLOBALES ================= */
+body {
+  background-color: var(--backgroundBody);
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+html {
+  scroll-padding-top: 100px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ================= COMPONENTES GLOBALES ================= */
+
+/* Botón general reutilizable */
+.button,
+button,
+.menu-button {
+  align-items: center;
+  appearance: none;
+  background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, var(--colorPrimary) 100%);
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
+              rgba(45, 35, 66, 0.3) 0 7px 13px -3px,
+              rgba(58, 65, 111, 0.5) 0 -3px 0 inset;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: Arial, Helvetica, sans-serif, "JetBrains Mono", monospace;
+  font-size: 14px;
+  height: 38px;
+  justify-content: center;
+  line-height: 1;
+  overflow: hidden;
+  padding: 0 16px;
+  transition: box-shadow 0.15s, transform 0.15s;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.button:hover,
+button:hover,
+.menu-button:hover {
+  box-shadow: rgba(45,35,66,0.4) 0 4px 8px,
+              rgba(45,35,66,0.3) 0 7px 13px -3px,
+              var(--colorPrimaryDark) 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.button:focus,
+button:focus,
+.menu-button:focus {
+  box-shadow: var(--colorPrimaryDark) 0 0 0 1.5px inset,
+              rgba(45,35,66,0.4) 0 2px 4px,
+              rgba(45,35,66,0.3) 0 7px 13px -3px,
+              var(--colorPrimaryDark) 0 -3px 0 inset;
+}
+
+.button:active,
+button:active,
+.menu-button:active {
+  box-shadow: var(--colorPrimaryDark) 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+/* Accesibilidad */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+/* WhatsApp icon */
+.whatsapp-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  font-size: 24px;
+  padding: 15px;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+  z-index: 1100;
+}
+.whatsapp-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Footer global */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--backgroundFooter);
+  color: white;
+  text-align: center;
+  padding: 15px;
+  z-index: 1000;
+  font-size: 0.70rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ================= HEADER & NAVIGATION ================= */
+.video-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150%;
+  aspect-ratio: 16 / 9; /* Mantiene la proporción del video */
+  overflow: hidden;
+  z-index: -1;
+}
+
+.video-header video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+header {
+  position: fixed; top: 0; left: 0;
+  width: 100%;
+  background: var(--backgroundHeader);
+  color: var(--colorText);
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.logo img {
+  width: 6rem;
+  filter: drop-shadow(4px 4px 6px rgba(122,68,120,0.62));
+}
+
+nav ul {
+  display: flex;
+  align-items: center; /* Centrado vertical de todos los <li> */
+  gap: 20px; /* Separación entre botones */
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+nav ul li {
+  position: relative;
+}
+
+nav ul li a.button {
+  display: inline-flex; /* Igual que inline-block, pero flexible */
+  align-items: center;  /* Centrado vertical del contenido interno */
+  justify-content: center; /* Centrado horizontal en el botón */
+  padding: 8px 16px;    /* Más espacio interno cómodo */
+  height: auto;         /* Mantiene la altura según el contenido */
+  text-decoration: none;
+}
+/* Ocultar el botón en escritorio */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+  z-index: 2;
+}
+
+/* Estilo base del nav */
+.responsive-nav {
+  display: flex;
+}
+
+/* ================= INICIO ================= */
+.home-page header {
+  background: linear-gradient(285deg, rgba(64, 9, 115, 1) 30%, rgb(8, 8, 87) 80%, rgb(148, 45, 168) 100%);
+}
+main {
+  background-image: url('../assets/Multimedia/img/webtimemachine.gif');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  min-height: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: antiquewhite;
+  padding-top: 0.5rem;
+}
+
+main form {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+main input {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  border: 1px solid #ccc;
+  min-width: 150px;
+  flex: 1;
+}
+
+main button i {
+  pointer-events: none;
+}
+
+.video-section {
+  margin-top: 10px;
+  text-align: center;
+  padding: 1rem;
+  background-color: antiquewhite;
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 26.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.video-wrapper video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.video-section h2,
+.video-section h3,
+.video-section p
+{
+  margin: 0.5rem auto;
+  max-width: 600px;
+  color: #0f2987;
+}
+
+.gif-container {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  margin-top: 20px;
+
+}
+
+.gif-container div {
+  position: relative;
+  width: 250px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: antiquewhite;
+  text-align: center;
+}
+
+.gif-container img {
+  position: absolute;
+  top: 10;
+  left: -20px;
+  width: 300px;
+  height: 200px;
+}
+
+.gif-container p {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: antiquewhite
+
+}
+section {
+  margin-top: 30px;
+}
+
+
+#video-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#video-overlay video {
+  max-width: 90%;
+  max-height: 90%;
+  cursor: pointer;
+}
+
+
+/*PRODUCTOS*/
+.main-productos {
+  max-height: 5rem;
+  background: linear-gradient(285deg, rgba(64, 9, 115, 1) 30%, rgb(8, 8, 87) 80%, rgb(148, 45, 168) 100%);
+  padding: 1rem 0;
+  margin-top: 5rem;
+}
+
+.form-busqueda-productos {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 1rem;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 50px;
+}
+
+.product-item {
+  width: 170px;
+  height: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Contenedor con efecto 3D con ayuda de IA*/
+.card-container {
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+}
+
+/* Flip interno con ayuda de IA */
+.card-flip-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 2s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.card-container:hover .card-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  background: linear-gradient(285deg, rgba(64,9,115,1) 30%, rgb(8,8,87) 80%, rgb(148,45,168) 100%);
+  color: white;
+  font-weight: normal;
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.card-back h3 {
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 12px;
+}
+
+.card-back p {
+  font-size: 9px;
+  font-weight: normal;
+  color: white;
+  line-height: 1;
+}
+.card-front img {
+  width: 100%;
+  height: auto;
+  max-height: 60%;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Botón */
+.button {
+  padding: 6px 12px;
+  font-size: 12px;
+  background-color: #004466;
+  color: white;
+  border: none;
+  border-radius: 4%;
+  cursor: pointer;
+}
+#boton-busqueda i {
+  font-size: 11px;
+}
+#busqueda::placeholder {
+  font-size: 11px;
+}
+
+.button:hover {
+  background-color: #006699;
+}
+.mensaje-no-resultados {
+  text-align: center;
+  color: #cc0000;
+  font-weight: bold;
+  margin-top: 35px;
+}
+
+/* ================= CONTACTO ================= */
+
+.contact-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+.contact-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 0 1rem;  /* ⬅️ importante: da espacio arriba del formulario */
+  background-color: (285deg, rgba(64,9,115,1) 30%, rgb(8,8,87) 80%, rgb(148,45,168) 100%);;
+  box-sizing: border-box;
+}
+/* === BOX FORMULARIO === */
+.contact-form-container {
+  flex: 1 1 auto;
+  max-width: 500px;
+  background-color: white;
+  padding: 2rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+}
+
+/* === FORMULARIO INTERNO === */
+.contact-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 400px;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-form-container input,
+.contact-form-container textarea,
+.contact-form-container select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.rating {
+  margin-top: 1rem;
+  font-size: 1.3rem;
+}
+
+.stars-input {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+.stars-input input[type="radio"] {
+  display: none;
+}
+
+.stars-input label {
+  cursor: pointer;
+  font-size: 2rem;
+  color: #ccc;
+  transition: color 0.2s;
+}
+
+.stars-input input:checked ~ label,
+.stars-input label:hover,
+.stars-input label:hover ~ label {
+  color: gold;
+}
+/* === BOTÓN CENTRADO === */
+.contact-form-container button {
+  width: fit-content;
+  align-self: center;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.contact-form-container button:hover {
+  background-color: #0056b3;
+}
+
+/* === MENSAJE DE ÉXITO === */
+#mensaje-exito {
+  text-align: center;
+  color: green;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+/* === RESEÑAS BLANCAS === */
+.reviews-section {
+  padding: 1rem;
+  background-color: (285deg, rgba(64,9,115,1) 30%, rgb(8,8,87) 80%, rgb(148,45,168) 100%);
+  color: #333;
+  text-align: center;
+}
+
+.review {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 0.5rem;
+  margin: 1rem;
+  min-width: 250px;
+  max-width: 300px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+
+.reviews-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.contact-body .carousel-scroll .review {
+  flex: 0 0 180px;
+  font-size: 0.85rem;
+  padding: 0.5rem;
+}
+
+.contact-body .carousel-scroll .review h3 {
+  font-size: 1rem;
+  color: rgb(31, 39, 184);
+}
+
+.contact-body .carousel-scroll .stars {
+  font-size: 1rem;
+}
+
+.contact-body .carousel-scroll p {
+  font-size: 0.85rem;
+  color: #6610a0;
+}
+
+.carousel-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  scroll-behavior: smooth;
+  padding: 0rem 0;
+  margin-top: 4rem;
+}
+.carousel-scroll::-webkit-scrollbar {
+  display: none;
+}
+.carousel-scroll .review {
+  flex: 0 0 250px;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px linear-gradient(285deg, rgba(64, 9, 115, 1) 30%, rgb(8, 8, 87) 80%, rgb(148, 45, 168) 100%);
+  transition: transform 0.3s;
+}
+.carousel-scroll .review:hover {
+  transform: scale(1.05);
+}
+.carousel-scroll .avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  object-fit: cover;
+}
+.carousel-scroll .review-content h3 {
+  color: var(--colorText);
+  font-size: 3rem;
+  margin: 0.5rem 0 0.5rem;
+}
+.carousel-scroll .stars {
+  color: gold;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+.carousel-scroll p {
+  font-size: 0.5rem;
+  color: #3a2f7a;
+  text-align: center;
+}
+.contact-body {
+  background: linear-gradient(285deg, rgba(64, 9, 115, 1) 30%, rgb(8, 8, 87) 80%, rgb(148, 45, 168) 100%);
+}
+/* ================= CARRITO ================= */
+#carrito-container {
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  color: #332ec9;
+  margin: 0 auto;
+}
+
+.carrito-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.carrito-item:last-child {
+  border-bottom: none;
+}
+
+.carrito-item button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.carrito-item button:hover {
+  background-color: #0056b3;
+}
+
+#total-carrito, #acciones-carrito {
+  max-width: 600px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+#acciones-carrito .button {
+  margin-left: 10px;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#acciones-carrito .button:hover {
+  background-color: #004a99;
+  color: white;
+}
+
+/* === ESTRUCTURA DEL PRODUCTO EN EL CARRITO === */
+.item-carrito {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  gap: 20px;
+  flex-wrap: nowrap;   /* todos los elementos en una línea */
+  width: 100%;          /* ocupa todo el ancho disponible */
+  box-sizing: border-box;
+}
+
+/* Imagen del producto */
+.item-carrito img {
+  width: 80px;
+  height: auto;
+  border-radius: 4px;
+  flex-shrink: 0;       /* no se reduce */
+}
+
+/* Información del producto */
+.info-producto {
+  flex: 2;
+  min-width: 0;         /* permite que se reduzca sin romper el layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Contador de cantidad */
+.contador {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.contador button {
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.contador span {
+  min-width: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Precio */
+.importe {
+  flex: 1;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: right;
+  min-width: 0;
+}
+
+/* Botón eliminar */
+.eliminar {
+  flex-shrink: 0;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #c00;
+  transition: color 0.3s;
+  margin-left: 10px;
+}
+
+.eliminar:hover {
+  color: #900;
+}
+
+/* === CUANDO EL CARRITO ESTÁ VACÍO === */
+.carrito-vacio-box {
+  background-color: white;
+  padding: 20px 10px;
+  border-radius: 20px;
+  max-width: 400px;
+  height: 160px;
+  margin: 40px auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.carrito-icono-vacio {
+  font-size: 50px;
+  color: #2538ca;
+  margin-bottom: 10px;
+}
+
+.mensaje-carrito-vacio {
+  font-size: 20px;
+  color: #2538ca;
+  margin: 0;
+}
+
+.mensaje-carrito-vacio i {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  display: block;
+  color: #007BFF;
+}
+
+/* === FONDO Y SECCIÓN PRINCIPAL === */
+.carrito-body {
+  background: linear-gradient(285deg, rgba(64, 9, 115, 1) 30%, rgb(8, 8, 87) 80%, rgb(148, 45, 168) 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+}
+
+.carrito-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 6rem; /* Ajustado para que no quede detrás del header */
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+/* === CONTADOR DEL ICONO DE CARRITO EN NAV === */
+nav ul li a.button {
+  position: relative;
+  display: inline-block;
+}
+
+.contador-carrito {
+  background-color: fuchsia;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  margin-left: 6px;
+  font-weight: bold;
+}
+/* === FORMULARIO DE REGISTRO Y PAGO === */
+.formulario-registro-pago {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.formulario-registro-pago h2 {
+  text-align: center;
+  color: var(--colorText);
+  margin-bottom: 20px;
+}
+
+.formulario-registro-pago label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.formulario-registro-pago input[type="text"],
+.formulario-registro-pago input[type="email"],
+.formulario-registro-pago input[type="password"],
+.formulario-registro-pago select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.formulario-registro-pago input[type="password"] {
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 0.2em;
+}
+
+/* === DETECCIÓN DE TARJETA === */
+#tipo-tarjeta {
+  display: block;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #007bff;
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+/* === BOTÓN FINAL === */
+.button-small {
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #007bff;  /* Color azul, puedes cambiarlo si quieres */
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+  font-family: inherit;
+  display: inline-block;
+  text-align: center;
+  user-select: none;
+}
+
+.button-small:hover {
+  background-color: #0056b3;
+}
+
+.button-small:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+/* === MENSAJES === */
+.mensaje-exito {
+  color: green;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.mensaje-error {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* ================= MEDIA QUERIES ================= */
+@media (max-width: 768px) {
+  .video-header {
+    aspect-ratio: 16 / 10;
+    .menu-toggle {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  }
+  .contact-form-container {
+    width: 95vw;
+    aspect-ratio: auto;      /* Se vuelve flexible */
+    padding: 2rem;
+  }
+  .logo img { width: 4.5rem; }
+  .responsive-nav {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+  }
+
+  .responsive-nav.active {
+    display: flex;
+  }
+
+  .responsive-nav ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+  nav ul { justify-content: center; }
+  .product { grid-template-columns: 1fr; }
+  .card-container { max-width: 90%; height: 320px; }
+  .card-back p { font-size: 0.75rem; }
+  .carousel-scroll .review { min-width: 200px; }
+  .contact-content { flex-direction: column; }
+  .contact-form-container,
+  .map-box { max-width: 100%; }
+
+
+@media (max-width: 480px) {
+  .logo img { width: 4rem; }
+  .whatsapp-icon { bottom: 50px; }
+  .product { padding: 1rem; }
+  .card-container { height: 240px; }
+  main form { flex-wrap: wrap; }
+  main input { min-width: 100px; }
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario de Pago</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="../CSS/style.css">
+  <link rel="stylesheet" href="../CSS/formularioPago.css">
+</head>
+<body>
+
+  <div class="formulario-registro-pago">
+    <h2>Finalizar Compra</h2>
+
+    <!-- Registro -->
+    <form id="registerForm">
+      <h3>Registro de Usuario</h3>
+
+      <label for="email">Correo electrónico:</label>
+      <input type="email" id="email" required>
+
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" required>
+
+      <button type="submit" class="button-small">Registrar</button>
+
+    </form>
+
+    <!-- Pago -->
+    <form id="paymentForm">
+      <h3>Método de Pago</h3>
+
+      <label for="cardType">Tarjeta:</label>
+      <select id="cardType" required>
+        <option value="">Seleccione</option>
+        <option value="visa">Visa</option>
+        <option value="mastercard">Mastercard</option>
+        <option value="mercadopago">MercadoPago</option>
+        <option value="naranjax">Naranja X</option>
+      </select>
+
+      <label for="cardNumber">Número de tarjeta:</label>
+      <input type="text" id="cardNumber" maxlength="16" required>
+
+      <!-- Muestra automática del tipo detectado (opcional) -->
+      <div id="tipo-tarjeta"></div>
+
+      <label for="amount">Importe total:</label>
+      <input type="text" id="amount" readonly>
+
+      <button type="submit" class="button-small">Confirmar Pago</button>
+
+    </form>
+
+    <!-- Mensajes opcionales -->
+    <div id="mensaje" class="mensaje-exito" style="display: none;"></div>
+  </div>
+
+  <script src="../JS/formularioPago.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+  </head>
+<body>
+
+  <header>
+  <div class="video-header">
+    <video autoplay muted loop playsinline>
+      <source src="../assets/Multimedia/video/Timemachinewebs.mp4" type="video/mp4">
+      Tu navegador no soporta video HTML5.
+    </video>
+  </div>
+
+  <div class="header-container">
+    <div class="logo">
+      <a href="../index.html">
+        <img src="../assets/Multimedia/img/TMLogor.gif" alt="Logo Empresa Time Machine">
+      </a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../index.html" class="button">Inicio</a></li>
+        <li><a href="../pages/productos.html" class="button">Productos</a></li>
+        <li><a href="../pages/contacto.html" class="button">Contacto</a></li>
+        <li><a href="../pages/carrito.html" class="button">Carrito</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="main-productos">
+  <form id="form-busqueda" role="search" class="form-busqueda-productos">
+    <label for="busqueda" class="sr-only">Buscar producto</label>
+    <input type="text" id="busqueda" placeholder="Buscar por nombre o descripción..." />
+    <button type="submit" class="button"><i class="fas fa-search"></i></button>
+  </form>
+</section>
+  <!-- Grid de productos -->
+  <div id="productGrid" class="product-grid"></div>
+
+  <!-- Mensaje si no hay resultados -->
+  <p id="mensajeNoResultados" style="display: none; text-align: center; font-weight: bold;">
+    No se encontraron productos
+  </p>
+
+
+<!-- WhatsApp y Footer -->
+<a href="https://wa.me/1234567890" target="_blank" class="whatsapp-icon" aria-label="Chat por WhatsApp">
+  <i class="fab fa-whatsapp" aria-hidden="true"></i>
+</a>
+
+<footer>
+  <p>© 2025 Machine - Todos los derechos reservados - Time Machine</p>
+</footer>
+
+<!-- Carga del script externo -->
+<script src="../JS/productos.js"></script>
+<script>
+    const toggleBtn = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".responsive-nav");
+
+    toggleBtn.addEventListener("click", () => {
+    nav.classList.toggle("active");
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TimeMachine</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+<body class="home-page"></body>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <a href="./index.html">
+          <img src="./assets/Multimedia/img/TMLogor.gif" alt="Logo Empresa Time Machine" />
+        </a>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="./index.html" class="button">Inicio</a></li>
+          <li><a href="./pages/productos.html" class="button" id="link-productos">Viajes</a></li>
+          <li><a href="./pages/contacto.html" class="button">Contacto</a></li>
+          <li><a href="./pages/carrito.html" class="button">Carrito</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<main></main>
+
+  <section class="video-section">
+    <h2>Tecnología</h2>
+    <div class="video-wrapper">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="../TimeMachine/assets/Multimedia/video/camtimemachine.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <h3>¡Te invitamos a una experiencia única!</h3>
+    <p id="parrafo-final">Todas las semanas realizamos viajes en la evolución de las diferentes tecnologías. Esta semana viajaremos y conoceremos las diferentes cámaras, videocámaras y sus avances hasta nuestros tiempos.</p>
+    <h3>!Aun estas a tiempo, te esperamos en viajes!!</h3>
+    <div class="gif-container">
+
+    </div>
+
+  </section>
+
+  <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-icon" aria-label="Chat por WhatsApp">
+    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+  </a>
+<div id="video-overlay" style="display: none;">
+  <video id="simulacion-video" autoplay muted playsinline>
+    <source src="./assets/Multimedia/video/iniproductos.mp4" type="video/mp4" />
+    Tu navegador no soporta el video.
+  </video>
+</div>
+
+  <footer>
+    <p>© 2025 Machine - Todos los derechos reservados - Time Machine</p>
+  </footer>
+  <script src="./js/insertarGifs.js"></script>
+  <script src="./js/main.js"></script>
+  <script>
+    const toggleBtn = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".responsive-nav");
+
+    toggleBtn.addEventListener("click", () => {
+    nav.classList.toggle("active");
+    });
+  </script>
+</body>
+
+</html>
