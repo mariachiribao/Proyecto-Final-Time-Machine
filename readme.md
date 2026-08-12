@@ -10,7 +10,7 @@
 | **Proyecto** | Time Machine |
 | **Tecnologías** | HTML, CSS, JavaScript |
 | **Soporte adicional** | IA para efectos y asistencia durante el desarrollo |
-
+| **https://maru2121.github.io/Con-Front-End-JS/index.html**|
 ---
 
 ## 🎯 Propósito del Proyecto
